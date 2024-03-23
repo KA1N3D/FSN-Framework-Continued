@@ -1,4 +1,4 @@
-# FiveM-FSN-Framework
+# Fusion Roleplay Framework (Otherwise known as FSN)
 Public Roleplay Framework for FiveM.
 
 #### Support / Issues / Feature Requests
