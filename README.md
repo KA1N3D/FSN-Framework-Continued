@@ -1,17 +1,16 @@
 # Fusion Roleplay Framework (Otherwise known as FSN)
-Public Roleplay Framework for FiveM.
+Public Roleplay Framework for FiveM. Continuation of JamesSc0tt's FSN Framework which has now been handed over to Fusion Dev Studios. Massive shout out to James and any previous developers that worked on this project and a massive thank you for allowing me to take over it's development. 
 
 #### Support / Issues / Feature Requests
-This project is in active development, I intend to cover major/minor bugs and also implement features I like the idea of. Any issues you find please report via GitHub's issue section. For support installing/using the framework please contact use our support discord: https://discord.gg/CNg73Xh
+This framework has not been touched for the past 2 years, there are currently many bugs which will be addressed in the weeks to come, a lot of features may also be outdated and we already have plenty of new features actively being developed! If you have any issues, questions or wish to participate with the continued development of FSN Framework then please join our Discord Server: https://discord.gg/2ZxQDJzC54
 
 #### Requirements
-- x86-64 system running Linux or Windows (7/2008 R2+), decent upstream connection.
-- FiveM Reborn Server
+- FiveM Server
 - Local/Remote MySQL database server
 - At **LEAST** 4GB disk space (including room for future updates) 
 - MySQL Server
 
-#### Alongside the FSN [resources](https://github.com/jamessc0tt/FiveM-FSN-Framework/blob/master/fsn_main/resources.txt), the "framework" is built to work with the below publicly available resources.
+#### Alongside the FSN the frameworks core resources, the "framework" is built to work with the below publicly available resources. These are dependicies and must be installed for the framework to run correctly, these will be reviewed.
 - mysql-async (https://github.com/brouznouf/fivem-mysql-async)
 - interactsound (https://github.com/plunkettscott/interact-sound)
 - K9 (https://github.com/xander1998/k9)
