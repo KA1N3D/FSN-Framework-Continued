@@ -1,5 +1,6 @@
 # Fusion Roleplay Framework (Otherwise known as FSN)
-Public Roleplay Framework for FiveM. Continuation of JamesSc0tt's FSN Framework [https://github.com/JamesSc0tt/FiveM-FSN-Framework] which has now been handed over to Fusion Dev Studios. Massive shout out to James and any previous developers that worked on this project and a massive thank you for allowing me to take over it's development. 
+
+Fusion Framework is a newly launched framework on the FiveM platform, created specifically for British Roleplay communities. The aim of FSN is to provide advanced features that match those offered by paid frameworks, but at no cost at all. The framework includes essential tools for running a high-quality FiveM server, along with many other features that enhance the overall experience. The framework was initially developed by JamesSc0tt [https://github.com/JamesSc0tt/FiveM-FSN-Framework] and has now been passed on to Fusion Dev Studios to continue its development. The ultimate goal is to provide a framework that contains every script required to run a high-quality modern-day roleplay community for no cost.
 
 #### Support / Issues / Feature Requests
 This framework has not been touched for the past 2 years, there are currently many bugs which will be addressed in the weeks to come, a lot of features may also be outdated and we already have plenty of new features actively being developed! If you have any issues, questions or wish to participate with the continued development of FSN Framework then please join our Discord Server: https://discord.gg/2ZxQDJzC54
