@@ -590,16 +590,6 @@ local lsc = {
 				{name = "Stock Tires", costs =1500, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Custom Tires", costs =1500, description = "", centre = 0, font = 0, scale = 0.4},
 				-- {name = "Bulletproof Tires", costs = 10000, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "White Tire Smoke", color = {254,254,254}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Black Tire Smoke", color = {1,1,1}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Blue Tire Smoke", color = {0,150,255}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Yellow Tire Smoke", color = {255,255,50}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Orange Tire Smoke", color = {255,153,51}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Red Tire Smoke", color = {255,10,10}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Green Tire Smoke", color = {10,255,10}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Purple Tire Smoke", color = {153,10,153}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Pink Tire Smoke", color = {255,102,178}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
-				 {name = "Gray Tire Smoke", color = {128,128,128}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
 			}
 		},
 		["respray"] = {
@@ -946,7 +936,8 @@ local lsc = {
 			buttons = {
 				{name = "Wheel Type", description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Wheel Color", description = "", centre = 0, font = 0, scale = 0.4},
-				{name = "Wheel Accessories", description = "", centre = 0, font = 0, scale = 0.4}
+				{name = "Wheel Accessories", description = "", centre = 0, font = 0, scale = 0.4},
+				{name = 'Tire Smoke', description = '', centre = 0, font = 0, scale = 0.4}
 			}
 		},
 		["wheeltype"] = {
@@ -1188,6 +1179,31 @@ local lsc = {
 				{name = "Neon Kits", description = "", centre = 0, font = 0, scale = 0.4}
 			}
 		},
+		["tiresmoke"] = {
+            title = "tire smoke",
+            name = "tiresmoke",
+            buttons = {
+				{name = "White Tire Smoke", color = {254,254,254}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Gray Tire Smoke", color = {128,128,128}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+                {name = "Black Tire Smoke", color = {1,1,1}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Blue Tire Smoke", color = {0,0,128}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Red Tire Smoke", color = {128,0,0}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Green Tire Smoke", color = {0,128,0}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Cyan Tire Smoke", color = {10,255,255}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Electric Blue Tire Smoke", color = {0,150,255}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Lime Green Tire Smoke", color = {0,255,0}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Mint Green Tire Smoke", color = {50,255,155}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+                {name = "Yellow Tire Smoke", color = {255,255,50}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+                {name = "Orange Tire Smoke", color = {255,153,51}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pink Tire Smoke", color = {255,102,178}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Purple Tire Smoke", color = {153,10,153}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Dark Green Tire Smoke", color = {0,50,0}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Dark Red Tire Smoke", color = {50,0,0}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Dark Blue Tire Smoke", color = {0,0,50}, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+
+
+            }
+        },
 		["neonkits"] = {
 			title = "neonkits",
 			name = "neonkits",
@@ -1226,8 +1242,36 @@ local lsc = {
 			title = "headlights",
 			name = "headlights",
 			buttons = {
+				{name = "Bulbs", description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Xenon Color", description = "", centre = 0, font = 0, scale = 0.4}
+			}
+		},
+		["bulbs"] = {
+			title = "bulbs",
+			name = "bulbs",
+			buttons = {
 				{name = "Stock Lights",mod = false, modtype = 22,costs = 30, description = "", centre = 0, font = 0, scale = 0.4},
 				{name = "Xenon Lights",mod = true,modtype = 22,costs = 70, description = "", centre = 0, font = 0, scale = 0.4}
+			}
+		},
+		["headlightcolor"] = {
+			title = "headlight color",
+			name = "headlightcolor",
+			buttons = {
+				{name = "Normal", color = -1, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "White", color = 0, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Blue", color = 1, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Electric Blue", color = 2, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Mint Green", color = 3, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Lime Green", color = 4, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Yellow", color = 5, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Golden Shower", color = 6, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Orange", color = 7, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Red", color = 8, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Pony Pink", color = 9, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Hot Pink", color = 10, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Purple", color = 11, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
+				{name = "Blacklight", color = 12, costs = 100, description = "", centre = 0, font = 0, scale = 0.4},
 			}
 		},
 		["plate"] = {
@@ -1318,6 +1362,8 @@ local vehiclecol = {}
 local extracol = {}
 local wheeltype = nil
 local neoncolor = nil
+local headlightcolor = nil
+local tiresmoke = nil
 local plateindex = nil
 local windowtint = nil
 local mods = {
@@ -1350,7 +1396,7 @@ return n + 0.0001
 end
 
 function LocalPed()
-return GetPlayerPed(-1)
+return PlayerPedId()
 end
 
 function try(f, catch_f)
@@ -1364,9 +1410,9 @@ function firstToUpper(str)
 end
 function DriveInGarage()
 
-	lsc.menu['repair'].buttons[1].costs = math.ceil((1000 - GetVehicleEngineHealth(GetVehiclePedIsIn(GetPlayerPed(-1), false))) + (1000 - GetVehiclePetrolTankHealth(GetVehiclePedIsIn(GetPlayerPed(-1), false))) + (1000 - GetVehicleBodyHealth(GetVehiclePedIsIn(GetPlayerPed(-1), false))) * 15)
+	lsc.menu['repair'].buttons[1].costs = math.ceil((1000 - GetVehicleEngineHealth(GetVehiclePedIsIn(PlayerPedId(), false))) + (1000 - GetVehiclePetrolTankHealth(GetVehiclePedIsIn(PlayerPedId(), false))) + (1000 - GetVehicleBodyHealth(GetVehiclePedIsIn(PlayerPedId(), false))) * 15)
 		local pos = lsc.currentpos.inside
-		local ped = GetPlayerPed(-1)
+		local ped = PlayerPedId()
 		local veh = GetVehiclePedIsUsing(ped)
 		if DoesEntityExist(veh) then
 
@@ -1623,6 +1669,7 @@ function DriveInGarage()
 			vehiclecol = table.pack(GetVehicleColours(veh))
 			extracol = table.pack(GetVehicleExtraColours(veh))
 			neoncolor = table.pack(GetVehicleNeonLightsColour(veh))
+			headlightcolor = GetVehicleHeadlightsColour(veh)
 			plateindex = GetVehicleNumberPlateTextIndex(veh)
 			for i,t in pairs(mods) do
 				t.mod = GetVehicleMod(veh,i)
@@ -1639,6 +1686,7 @@ function DriveInGarage()
 			end
 			windowtint = GetVehicleWindowTint(veh)
 			wheeltype = GetVehicleWheelType(veh)
+			tiresmoke = table.pack(GetVehicleTyreSmokeColor(veh))
 		end
 
 end
@@ -1646,7 +1694,7 @@ end
 function DriveOutOfGarage()
 	SetStreamedTextureDictAsNoLongerNeeded("mpmissmarkers256")
 	lsc.inside = false
-	local ped = GetPlayerPed(-1);
+	local ped = PlayerPedId();
 	local veh = GetVehiclePedIsUsing(ped);
 	lsc.menu["frontbumper"].buttons = {}
 	lsc.menu["rearbumper"].buttons = {}
@@ -1705,6 +1753,7 @@ function DriveOutOfGarage()
 	savetable.mods = mods
 	-- WHEELTYPE
 	savetable.wheeltype = GetVehicleWheelType(veh)
+	tiresmoke = GetVehicleTyreSmokeColor(veh)
 
 	TriggerServerEvent('fsn_cargarage:updateVehicle', exports["fsn_cargarage"]:getCarDetails(veh))
 end
@@ -1846,7 +1895,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		if lsc ~= nil and lsc.inside == false then
-			local ped = GetPlayerPed(-1);
+			local ped = PlayerPedId();
 			if IsPedSittingInAnyVehicle(ped) then
 				local veh = GetVehiclePedIsUsing(ped)
 				if DoesEntityExist(veh) and (IsThisModelACar(GetEntityModel(veh)) or IsThisModelABike(GetEntityModel(veh)))  then
@@ -1864,7 +1913,7 @@ Citizen.CreateThread(function()
 				end
 			end
 		elseif lsc ~= nil then
-			local ped = GetPlayerPed(-1);
+			local ped = PlayerPedId();
 			local veh = GetVehiclePedIsUsing(ped)
 			if (lsc.currentpos and GetDistanceBetweenCoords(lsc.currentpos.inside.x,lsc.currentpos.inside.y,lsc.currentpos.inside.z,GetEntityCoords(ped)) > 10) then
 				DriveOutOfGarage();
@@ -1887,7 +1936,7 @@ Citizen.CreateThread(function()
 							end
 							drawMenuButton(button,lsc.menu.x,y,selected)
 							if button.costs ~= nil then
-								if lsc.currentmenu == "headlights" then
+								if lsc.currentmenu == "bulbs" then
 									if button.name == "Stock Lights"  then
 										if not IsToggleModOn(veh, button.modtype)  then
 											drawMenuOwned(lsc.menu.x,y,selected)
@@ -1973,6 +2022,12 @@ Citizen.CreateThread(function()
 									else
 										drawMenuCost(button,lsc.menu.x,y,selected)
 									end
+								elseif lsc.currentmenu == "headlightcolor" then
+									if button.color == headlightcolor then
+										drawMenuOwned(lsc.menu.x,y,selected)
+									else
+										drawMenuCost(button,lsc.menu.x,y,selected)
+									end
 								elseif (lsc.currentmenu == "primaryclassic" or lsc.currentmenu == "primarychrome" or lsc.currentmenu == "primarymatte" or lsc.currentmenu == "primarymetal" or lsc.currentmenu == "primarymetallic") then
 									if button.colorindex == vehiclecol[1] then
 										drawMenuOwned(lsc.menu.x,y,selected)
@@ -2011,6 +2066,12 @@ Citizen.CreateThread(function()
 											drawMenuCost(button,lsc.menu.x,y,selected)
 										end
 									end
+								elseif lsc.currentmenu == "tiresmoke" then
+                                    if button.color[1] == tiresmoke[1] and button.color[2] == tiresmoke[2] and button.color[3] == tiresmoke[3] then
+                                        drawMenuOwned(lsc.menu.x,y,selected)
+                                    else
+                                        drawMenuCost(button,lsc.menu.x,y,selected)
+                                    end
 								elseif lsc.currentmenu == "windows" then
 									if windowtint == button.tint then
 										drawMenuOwned(lsc.menu.x,y,selected)
@@ -2065,11 +2126,21 @@ Citizen.CreateThread(function()
 											horn = button.name
 										end
 									end
+									if lsc.currentmenu == "tiresmoke" then
+										--print(table.unpack(tiresmoke))
+										SetVehicleModKit(veh,0)
+										ToggleVehicleMod(veh,20,true)
+										SetVehicleTyreSmokeColor(veh,button.color[1],button.color[2],button.color[3])
+									end
 									if lsc.currentmenu == "windows" then
 										SetVehicleWindowTint(veh, button.tint)
 									end
 									if lsc.currentmenu == "neoncolor" then
 										SetVehicleNeonLightsColour(veh,button.color[1],button.color[2],button.color[3])
+									end
+									if lsc.currentmenu == "headlightcolor" then
+										--print(button.color[1],button.color[2],button.color[3])
+										SetVehicleHeadlightsColour(veh,button.color)
 									end
 									if lsc.currentmenu == "plate" then
 										SetVehicleNumberPlateTextIndex(veh,button.plateindex)
@@ -2114,7 +2185,7 @@ end)
 
 
 function ButtonSelected(button)
-	local ped = GetPlayerPed(-1)
+	local ped = PlayerPedId()
 	local car = GetVehiclePedIsUsing(ped)
 	if lsc.currentmenu == "repair" then
 		if button.name == "Repair vehicle" then
@@ -2241,34 +2312,49 @@ function ButtonSelected(button)
 			OpenMenu("pearlescentmetallic")
 		end
 	elseif lsc.currentmenu == "primarychrome" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
 	elseif lsc.currentmenu == "primaryclassic" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
 	elseif lsc.currentmenu == "primarymatte" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
 	elseif lsc.currentmenu == "primarymetal" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
 	elseif lsc.currentmenu == "primarymetallic" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[1] = button.colorindex
 	elseif lsc.currentmenu == "secondarychrome" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
 	elseif lsc.currentmenu == "secondaryclassic" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
 	elseif lsc.currentmenu == "secondarymatte" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
 	elseif lsc.currentmenu == "secondarymetal" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
 	elseif lsc.currentmenu == "secondarymetallic" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		vehiclecol[2] = button.colorindex
 	elseif lsc.currentmenu == "pearlescentchrome" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
 	elseif lsc.currentmenu == "pearlescentclassic" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
 	elseif lsc.currentmenu == "pearlescentmatte" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
 	elseif lsc.currentmenu == "pearlescentmetal" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
 	elseif lsc.currentmenu == "pearlescentmetallic" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[1] = button.colorindex
 	elseif lsc.currentmenu == "bumpers" then
 		if button.name == "Front Bumpers" then
@@ -2290,17 +2376,25 @@ function ButtonSelected(button)
 			OpenMenu('neoncolor')
 		end
 	elseif lsc.currentmenu == "headlights" then
+		if button.name == "Bulbs" then
+			OpenMenu('bulbs')
+		elseif button.name == "Xenon Color" then
+			OpenMenu('headlightcolor')
+		end
+	elseif lsc.currentmenu == "bulbs" then
 		if button.name == "Stock Lights" then
 			ToggleVehicleMod(car, 22, false)
 			mods[22].mod = -1;
 
 		elseif button.name == "Xenon Lights" and moneycheck(button.costs) then
 			if (moneycheck(button.costs)) then
+				TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 				ToggleVehicleMod(car, 22, true)
 				mods[22].mod = 1;
 			end
 		end
 	elseif lsc.currentmenu == "plate" then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		plateindex = button.plateindex
 	elseif lsc.currentmenu == "chassis" or lsc.currentmenu == "armor" or lsc.currentmenu == "brakes" or lsc.currentmenu == "frontbumper" or lsc.currentmenu == "rearbumper" or lsc.currentmenu == "engine" or lsc.currentmenu == "exhaust" or lsc.currentmenu == "hood" or lsc.currentmenu == "horn" or lsc.currentmenu == "rollcage" or lsc.currentmenu == "roof" or lsc.currentmenu == "skirts" or lsc.currentmenu == "spoiler" or lsc.currentmenu == "suspension" or lsc.currentmenu == "transmission" or lsc.currentmenu == "grille" or lsc.currentmenu == "horn" then
 		if (moneycheck(button.costs)) then
@@ -2341,14 +2435,16 @@ function ButtonSelected(button)
 		elseif button.name == "Wheel Accessories" then
 			SetVehicleModKit(car,0)
 			OpenMenu("wheelaccessories")
+		elseif button.name == "Tire Smoke" then
+            OpenMenu('tiresmoke')
 		end
 	elseif lsc.currentmenu == "wheeltype" then
 		if button.name == "Stock" then
 			SetVehicleWheelType(car,-1)
-		elseif button.name == "Front Wheel" and moneycheck(button.costs) then
+		elseif button.name == "Front Wheel" then
 			SetVehicleWheelType(car,button.wtype)
 			OpenMenu("frontwheel")
-		elseif button.name == "Back Wheel" and moneycheck(button.costs) then
+		elseif button.name == "Back Wheel" then
 			SetVehicleWheelType(car,button.wtype)
 			OpenMenu("backwheel")
 		else
@@ -2363,8 +2459,10 @@ function ButtonSelected(button)
 			SetVehicleMod(car,button.modtype,button.mod)
 		end
 	elseif lsc.currentmenu == "wheelcolor" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		extracol[2] = button.colorindex
 	elseif lsc.currentmenu == "windows" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
 		windowtint = button.tint
 	elseif lsc.currentmenu == "wheelaccessories" then
 		if button.name == "Stock Tires" and moneycheck(button.costs) then
@@ -2385,6 +2483,11 @@ function ButtonSelected(button)
 				end
 			end
 		end
+    elseif lsc.currentmenu == "tiresmoke" and moneycheck(button.costs) then --and moneycheck(button.costs) then
+        TriggerEvent('fsn_bank:change:walletMinus', button.costs)
+        tiresmoke[1] = button.color[1]
+        tiresmoke[2] = button.color[2]
+        tiresmoke[3] = button.color[3]
 	elseif lsc.currentmenu == "neonlayout" then
 		if button.name == "None" then
 			SetVehicleNeonLightEnabled(car,0,false)
@@ -2411,6 +2514,9 @@ function ButtonSelected(button)
 		neoncolor[1] = button.color[1]
 		neoncolor[2] = button.color[2]
 		neoncolor[3] = button.color[3]
+	elseif lsc.currentmenu == "headlightcolor" and moneycheck(button.costs) then
+		TriggerEvent('fsn_bank:change:walletMinus', button.costs)
+		headlightcolor = button.color
 	end
 end
 
@@ -2440,6 +2546,8 @@ function OpenMenu(menu)
 		lsc.lastmenu = "main"
 	elseif menu == "neonkits" then
 		lsc.lastmenu = "lights"
+	elseif menu == "headlights" then
+		lsc.lastmenu = "lights"
 	end
 	lsc.menu.from = 1
 	lsc.menu.to = 10
@@ -2453,7 +2561,7 @@ function Back()
 		return
 	end
 	backlock = true
-	local ped = GetPlayerPed(-1)
+	local ped = PlayerPedId()
 	local car = GetVehiclePedIsUsing(ped)
 	if lsc.currentmenu == "main" or lsc.currentmenu == "repair" then
 		DriveOutOfGarage()
@@ -2524,8 +2632,13 @@ function Back()
 	elseif lsc.currentmenu == "windows" then
 		SetVehicleWindowTint(car, windowtint)
 		OpenMenu(lsc.lastmenu)
+	elseif menu == "tiresmoke" then
+        lsc.lastmenu = "wheels"
 	elseif lsc.currentmenu == "neoncolor" then
 		SetVehicleNeonLightsColour(car,neoncolor[1],neoncolor[2],neoncolor[3])
+		OpenMenu(lsc.lastmenu)
+	elseif lsc.currentmenu == "headlightcolor" then
+		SetVehicleHeadlightsColour(car,headlightcolor)
 		OpenMenu(lsc.lastmenu)
 	elseif lsc.currentmenu == "plate" then
 		SetVehicleNumberPlateTextIndex(car,plateindex)

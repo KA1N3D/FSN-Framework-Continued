@@ -21,6 +21,7 @@ function isWhitelisted(groupid)
 end
 
 function getWhitelistDetails(groupid)
+	TriggerServerEvent('fsn_jobs:whitelist:request')
 	return Whitelists[groupid]
 end
 
@@ -40,7 +41,7 @@ end
 
 function addToWhitelist(wlid, charid, level)
 	if Whitelists[wlid].owner == exports["fsn_main"]:fsn_CharID() then
-		if level ~= '' then
+		if level > 0 then
 			TriggerServerEvent('fsn_jobs:whitelist:add', wlid, charid, level)
 			exports['mythic_notify']:DoCustomHudText('inform', 'Adding '..charid..' to '..Whitelists[wlid].title..' at '..level, 4000)
 		else
@@ -76,11 +77,33 @@ end
 
 RegisterNetEvent('fsn_jobs:whitelist:clock:in')
 AddEventHandler('fsn_jobs:whitelist:clock:in', function(id)
+	
 	current_clockid = id
+
+	--[[
+	Set your whitelists ids here for example whitelist id 1 is PDM 2 is mechanic etc etc. 
+	This can be found in the whitelists/server.lua and your database under fsn_whitelists
+	]]--
+	if current_clockid == 1 then
+		fsn_SetJob('CarDealer')
+	
+	elseif current_clockid == 2 then
+		fsn_SetJob("Mechanic")
+	
+	elseif current_clockid == 3 then
+		fsn_SetJob('Rancher')
+	
+	elseif current_clockid == 4 then
+		fsn_SetJob('BoatDealer')
+	end
+
 end)
 RegisterNetEvent('fsn_jobs:whitelist:clock:out')
 AddEventHandler('fsn_jobs:whitelist:clock:out', function()
 	current_clockid = 0
+
+	fsn_SetJob('Unemployed')
+
 end)
 
 RegisterNetEvent('fsn_jobs:whitelist:update')

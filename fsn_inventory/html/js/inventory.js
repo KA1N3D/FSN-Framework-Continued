@@ -1,5 +1,26 @@
 var canUse = true
 window.addEventListener("message", function (event) {
+	if (event.data.actionbar) {
+		if (event.data.display) {
+			for (i = 1; i < 6; i++) {
+				var ni = i - 1
+				if (event.data.items[ni].index) {
+					$('#actionbaritem-'+ni).attr("src","img/items/"+event.data.items[ni].index+".png")
+					if (event.data.items[ni].inuse) {
+						$('#actionbaritem-'+ni).addClass('inuse');
+					} else {
+						$('#actionbaritem-'+ni).removeClass('inuse');
+					}
+					$('#actionbaritem-'+ni).show()
+				} else {
+					$('#actionbaritem-'+ni).hide()
+				}
+			}
+			$('.actionbar').show()
+		} else {
+			$('.actionbar').hide()
+		}
+	}
 	if (event.data.action == 'display') {
 		if (event.data.val) {
 			$('.ui').show()
@@ -49,6 +70,22 @@ function log(string) {
 	$('.console').prepend('<div class="console_entry">[JS]['+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()+'] '+string+'</div>')
 }
 
+$(document).ready(function () {
+    $("#count").focus(function () {
+        $(this).val("")
+    }).blur(function () {
+        if ($(this).val() == "") {
+            $(this).val("1")
+		}
+		if ($(this).val() <= 0) {
+            $(this).val("1")
+		}
+		if ($(this).val() > 999999) {
+            $(this).val("999999")
+        }
+	});
+});
+
 function updateInv(div, data) {
 	log('got update from lua') 
 	$('#'+div).html('')
@@ -56,15 +93,26 @@ function updateInv(div, data) {
 	if (data.length > 0) {
 		for (var key in data){
 			var item = data[key]
+			var hotkey = Number(key)+1
+			if (hotkey < 6) {
+				hotkey = '<div class="item-num"><span>'+
+							hotkey+
+						'</span></div>'
+			} else { hotkey = '' }
 			if (item.name) {
+				var busy = ''
+				if (item.inuse) {
+					busy = 'inuse';
+				}
 				updateString = updateString+
-					'<div class="slot" data-inventory="'+div+'" data-slotid="'+key+'">'+
+					'<div class="slot '+busy+'" data-inventory="'+div+'" data-slotid="'+key+'">'+
 						'<div class="item" data-inventory="'+div+'" data-slotid="'+key+'" onclick="viewData(\''+div+'/'+key+'\')">'+
 							'<div class="item-icon">'+
 								'<img src="img/items/'+item.index+'.png"/>'+
 								'<div class="item-amt">'+
 									item.amt+
 								'</div>'+
+								hotkey+
 							'</div>'+
 							'<div class="item-name">'+
 								item.name+
@@ -116,19 +164,19 @@ function init() {
 	$('.slot').droppable({
 		drop: function (event, ui) {
 			hoverClass: 'hoverControl',
-			updateSlot(num, $(this).data("inventory"), $(this).data("slotid"), ui.draggable.data("inventory"), ui.draggable.data("slotid"))	
+			updateSlot(parseInt($("#count").val()), $(this).data("inventory"), $(this).data("slotid"), ui.draggable.data("inventory"), ui.draggable.data("slotid"))	
 		}
 	});
 	$('#drop').droppable({
 		drop: function (event, ui) {
 			hoverClass: 'hoverControl',
-			dropSlot(num, ui.draggable.data("inventory"), ui.draggable.data("slotid"))	
+			dropSlot(parseInt($("#count").val()), ui.draggable.data("inventory"), ui.draggable.data("slotid"))	
 		}
 	});
 	$('#use').droppable({
 		drop: function (event, ui) {
 			hoverClass: 'hoverControl',
-			useSlot(num, ui.draggable.data("inventory"), ui.draggable.data("slotid"))	
+			useSlot(parseInt($("#count").val()), ui.draggable.data("inventory"), ui.draggable.data("slotid"))	
 		}
 	});
 }
@@ -162,32 +210,9 @@ function updateSlot(amt, toInv, toSlot, fromInv, fromSlot) {
 	}));
 }
 
-var num = -99
-function numChange(up) {
-	if (up) {
-		if (num < 1) {
-			num = 1
-		}
-		num = num + 1
-		if (num > 10) {
-			num = -99
-		}
-	} else {
-		num = num - 1
-		if (num < 1) {
-			num = -99
-		}
-	}
-	if (num == -99) {
-		$('.number').html('ALL')
-	} else {
-		$('.number').html(num)
-	}
-}
-
 document.onkeydown = function(evt) {
     evt = evt || window.event;
-    if (evt.keyCode == 27 || evt.keyCode == 112) {
+    if (evt.keyCode == 27 || evt.keyCode == 112 || evt.keyCode == 9) {
         $.post('http://fsn_inventory/closeGUI', JSON.stringify({}))
 	}
 };

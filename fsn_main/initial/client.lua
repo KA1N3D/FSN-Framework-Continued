@@ -3,6 +3,7 @@ local cur_char = {}
 
 RegisterNetEvent('spawnme')
 AddEventHandler('spawnme', function()
+  print'spawned'
   fsn_spawned = true
 end)
 
@@ -134,7 +135,7 @@ function fsn_mainSpawn()
   DoScreenFadeOut(500)
   --NetworkResurrectLocalPlayer(spawncoords.x, spawncoords.y, spawncoords.z, Citizen.PointerValueVector(), true, true, false)
   --TriggerEvent('PlayerSpawned')
-  SetEntityCoords(GetPlayerPed(-1), spawncoords.x, spawncoords.y, spawncoords.z)
+  SetEntityCoords(PlayerPedId(), spawncoords.x, spawncoords.y, spawncoords.z)
   freezePlayer(-1, true)
   --Citizen.CreateThread(function()
     Citizen.Wait(2000)
@@ -177,21 +178,8 @@ AddEventHandler('fsn_main:initiateCharacter', function(char)
 
   SetNuiFocus(false,false)
   SendNUIMessage({type='charMenu', enable=false})
-
-  SetEntityCoords(GetPlayerPed(-1), vector3(-216.92286682129, -1038.2293701172, 31.140268325806))
-  fsn_spawned = true
-  SetEntityVisible(GetPlayerPed(-1), true)
-  TriggerEvent("clothes:spawn", json.decode(char.char_model))
-    
-  TriggerEvent('fsn_main:character', char)
-  TriggerEvent('fsn_police:init', char.char_police)
-  TriggerEvent('fsn_jail:init', char.char_id)
-  TriggerEvent('fsn_inventory:initChar', char.char_inventory)
-  TriggerEvent('fsn_bank:change:bankAdd', 0)
-  TriggerEvent('fsn_ems:reviveMe:force')
-
-  --TriggerEvent('chatMessage', '', {255,255,255}, '^1^*Warning:^r This is a beta release of the :FSN: Framework. We aren\'t expecting any bugs, but those that are found should be reported via dm to JamesSc0tt on discord or the forums.')
-  TriggerServerEvent('fsn_apartments:getApartment', char.char_id)
+  
+  TriggerEvent('fsn_spawnmanager:start', char)
 end)
 
 RegisterNetEvent('fsn_main:sendCharacters')
@@ -210,6 +198,7 @@ end)
 
 RegisterNUICallback('spawnCharacter', function(data, cb)
   TriggerServerEvent('fsn_main:getCharacter', data.character_id)
+  TriggerServerEvent('fsn:playerReady')
 end)
 
 RegisterNUICallback('createCharacter', function(data, cb)
@@ -237,7 +226,7 @@ end)
 -------------------------------------------------------------
 
 NetworkSetFriendlyFireOption(true)
-SetCanAttackFriendly(GetPlayerPed(-1), true, true)
+SetCanAttackFriendly(PlayerPedId(), true, true)
 ------------------------------------------------------------- character changer
 --[[llocal function char_change_timeout()
 	local when = GetGameTimer() + 30*1000
@@ -265,7 +254,7 @@ end
 
 local char_changer = vector3(-219.72131347656, -1054.1688232422, 30.14019203186)
 Util.Tick(function()
-	local dist = #(char_changer-GetEntityCoords(GetPlayerPed(-1)))
+	local dist = #(char_changer-GetEntityCoords(PlayerPedId()))
 
 	if dist < 10 then
 		DrawMarker(1,pos-vector3(0,0,1),0,0,0,0,0,0,3.001,3.0001,0.4001,0,155,255,175,0,0,0,0)
@@ -288,7 +277,7 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
 
-    local dist = #(char_changer-GetEntityCoords(GetPlayerPed(-1)))
+    local dist = #(char_changer-GetEntityCoords(PlayerPedId()))
     if dist < 10 then
       DrawMarker(1,char_changer-vector3(0,0,1),0,0,0,0,0,0,3.001,3.0001,0.4001,0,155,255,175,0,0,0,0)
       if dist < 3 then

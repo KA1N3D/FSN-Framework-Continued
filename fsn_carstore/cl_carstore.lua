@@ -26,7 +26,7 @@ function BuyCar(key)
 	SetEntityAsMissionEntity(personalvehicle, true, true)
 	SetVehicleColours(personalvehicle,colors[1],colors[2])
 	SetVehicleExtraColours(personalvehicle,extra_colors[1],extra_colors[2])
-	TaskWarpPedIntoVehicle(GetPlayerPed(-1),personalvehicle,-1)
+	TaskWarpPedIntoVehicle(PlayerPedId(),personalvehicle,-1)
 	SetEntityVisible(ped,true)
 	
 	local details = {
@@ -82,14 +82,14 @@ function BuyCar(key)
 end
 
 Util.Tick(function()
-	if GetDistanceBetweenCoords(inside_store.x, inside_store.y, inside_store.z, GetEntityCoords(GetPlayerPed(-1)), true) < 100 then
+	if GetDistanceBetweenCoords(inside_store.x, inside_store.y, inside_store.z, GetEntityCoords(PlayerPedId()), true) < 100 then
 		for key, car in pairs(car_spots) do
 			if car.car.model then
 				if not DoesEntityExist(car.car.object) then
 					RequestModel(GetHashKey(car.car.model))
 					while not HasModelLoaded(GetHashKey(car.car.model)) do
 						Citizen.Wait(1)
-						if GetDistanceBetweenCoords(inside_store.x, inside_store.y, inside_store.z, GetEntityCoords(GetPlayerPed(-1)), true) < 10 then
+						if GetDistanceBetweenCoords(inside_store.x, inside_store.y, inside_store.z, GetEntityCoords(PlayerPedId()), true) < 10 then
 							Util.DrawText3D(car.x, car.y, car.z, ':FSN: Loading vehicle: '..car.car.model, {255, 0, 0, 255}, 0.2)
 						end
 					end
@@ -111,6 +111,7 @@ Util.Tick(function()
 					FreezeEntityPosition(car.car.object, true)
 					SetEntityInvincible(car.car.object,true)
 					SetEntityAsMissionEntity( car.car.object, true, true )
+					SetVehicleNumberPlateText(car.car.object, "PDMFLOOR")
 					
 					if not car.updated then
 						IsEntityVisible(car.car.object)
@@ -129,7 +130,7 @@ Util.Tick(function()
 							Util.DrawText3D(car.x, car.y, car.z, ':FSN: Updating vehicle', {255, 0, 0, 255}, 0.2)
 						end
 					else
-						if GetDistanceBetweenCoords(car.x, car.y, car.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+						if GetDistanceBetweenCoords(car.x, car.y, car.z, GetEntityCoords(PlayerPedId()), true) < 2 then
 							Util.DrawText3D(car.x, car.y, car.z+0.25, ':FSN: Vehicle: '..car.car.name, {255, 255, 255, 255}, 0.3)
 							Util.DrawText3D(car.x, car.y, car.z+0.15, 'Base Price: $'..car.car.buyprice, {255, 255, 255, 200}, 0.2)
 							Util.DrawText3D(car.x, car.y, car.z+0.1, 'Commission: '..car.car.commission..'%', {255, 255, 255, 200}, 0.2)
@@ -137,6 +138,7 @@ Util.Tick(function()
 							Util.DrawText3D(car.x, car.y, car.z+0.05, 'Actual Price $'..car.car.buyprice+comm, {255, 255, 255, 200}, 0.2)
 							if exports["fsn_jobs"]:isWhitelistClockedIn(1) then
 								Util.DrawText3D(car.x, car.y, car.z-0.5, '[E] Organise Finance ~b~||~w~ [H] Change ~b~||~w~ /comm {new%}', {255, 255, 255, 255}, 0.25)
+								Util.DrawText3D(car.x, car.y, car.z-0.10, '~g~[G]~w~ to test drive',{255, 255, 255, 255}, 0.25)
 								if IsControlJustPressed(0, 74) then
 									-- [H] Change car
 									OpenCreator(key)
@@ -145,8 +147,12 @@ Util.Tick(function()
 									-- [E] Organise finance
 									exports['mythic_notify']:DoCustomHudText('error', 'Your business has not been around long enough to afford this!', 3000)
 								end
+								if IsControlJustPressed(0, 47) then
+									-- [G] Test Drive
+									TestDriveVehicle(key)
+								end
 							else
-								Util.DrawText3D(car.x, car.y, car.z-0.5, '[E] Purchase ~b~||~w~ Talk to an employee to discuss finance!', {255, 255, 255, 255}, 0.25)
+								Util.DrawText3D(car.x, car.y, car.z-0.5, '[E] Purchase ~b~||~w~ Talk to an employee to discuss finance or to test drive!', {255, 255, 255, 255}, 0.25)
 								if IsControlJustPressed(0, 38) then
 									-- [E] Purchase
 									if exports["fsn_main"]:fsn_CanAfford(car.car.buyprice+comm) then
@@ -186,7 +192,7 @@ end)
 RegisterNetEvent('fsn_carstore:floor:commission')
 AddEventHandler('fsn_carstore:floor:commission', function(amt)
 	for k,v in pairs(car_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
 			TriggerServerEvent('fsn_carstore:floor:commission', k, amt)
 		end
 	end
@@ -194,7 +200,7 @@ end)
 RegisterNetEvent('fsn_carstore:floor:color:One')
 AddEventHandler('fsn_carstore:floor:color:One', function(col)
 	for k,v in pairs(car_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
 			TriggerServerEvent('fsn_carstore:floor:color:One', k, col)
 		end
 	end
@@ -202,7 +208,7 @@ end)
 RegisterNetEvent('fsn_carstore:floor:color:Two')
 AddEventHandler('fsn_carstore:floor:color:Two', function(col)
 	for k,v in pairs(car_spots) do
-		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(GetPlayerPed(-1)), true) < 2 then
+		if GetDistanceBetweenCoords(v.x, v.y, v.z, GetEntityCoords(PlayerPedId()), true) < 2 then
 			TriggerServerEvent('fsn_carstore:floor:color:Two', k, col)
 		end
 	end
@@ -217,4 +223,73 @@ Citizen.CreateThread(function()
 	AddTextComponentString("Chapman Motors")
 	EndTextCommandSetBlipName(blip)
 	Citizen.Wait(0)
+end)
+
+-- Test Drive Functions
+
+function TestDriveVehicle(key)
+	if TestingCar then
+		exports['mythic_notify']:DoCustomHudText('error', 'Test vehicle already out. Only one test vehicle can be out at a time.', 7000)
+		return;
+	end
+	TestingCar = true
+
+	local veh = car_spots[key].car.object
+	local model = GetEntityModel(veh)
+	local colors = table.pack(GetVehicleColours(veh))
+	local extra_colors = table.pack(GetVehicleExtraColours(veh))
+
+	Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(veh))
+	local pos = {-45.347373962402, -1082.3184814453, 26.691509246826}
+	
+	FreezeEntityPosition(ped,false)
+	RequestModel(model)
+	while not HasModelLoaded(model) do
+		Citizen.Wait(0)
+	end
+	testvehicle = CreateVehicle(model,pos[1],pos[2],pos[3],pos[4],true,false)
+	SetModelAsNoLongerNeeded(model)
+
+	SetVehicleOnGroundProperly(testvehicle)
+	SetVehicleHasBeenOwnedByPlayer(testvehicle,true)
+	exports['mythic_notify']:DoCustomHudText('success', 'The test vehicle is outside.', 3000)
+	local id = NetworkGetNetworkIdFromEntity(testvehicle)
+	SetNetworkIdCanMigrate(id, true)
+	--Citizen.InvokeNative(0x629BFA74418D6239,Citizen.PointerValueIntInitialized(personalvehicle))
+	SetEntityAsMissionEntity(testvehicle, true, true)
+	SetVehicleColours(testvehicle,colors[1],colors[2])
+	SetVehicleExtraColours(testvehicle,extra_colors[1],extra_colors[2])
+	SetVehicleNumberPlateText(testvehicle, "PDM TEST")
+
+	TriggerEvent('fsn_cargarage:makeMine', testvehicle, car_spots[key].car.model, GetVehicleNumberPlateText(testvehicle))
+
+	TestingCar = testvehicle
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(10)
+		if TestingCar then
+			local playerPed = PlayerPedId()
+			local playerPos = GetEntityCoords(playerPed)
+
+			local testVehicleReturn = vector3(-45.347373962402, -1082.3184814453, 26.691509246826)
+
+			if Util.GetVecDist(playerPos, testVehicleReturn.xyz) < 10 then
+				Util.DrawText3D(testVehicleReturn.x, testVehicleReturn.y, testVehicleReturn.z+0.5, 'Press ~g~[ E ]~w~ to return the test vehicle.', {255, 255, 255, 255}, 0.25)
+				if IsControlJustPressed(0, Util.GetKeyNumber("E"), IsDisabledControlJustPressed(0, Util.GetKeyNumber("E"))) then
+					local maxPassengers = GetVehicleMaxNumberOfPassengers(TestingCar)
+					for seat = -1,maxPassengers-1,1 do
+						local ped = GetPedInVehicleSeat(TestingCar, seat)
+						if ped and ped ~= 0 then TaskLeaveVehicle(ped, TestingCar,16); end
+					end
+					SetEntityAsMissionEntity( TestingCar, false, true )
+					Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( TestingCar ) )
+					exports['mythic_notify']:DoCustomHudText('success', 'Test vehicle has been returned')
+					if DoesEntityExist(TestingCar) then SetVehicleUndriveable(TestingCar, true); end
+					TestingCar = false
+				end
+			end
+		end
+	end
 end)

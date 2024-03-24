@@ -57,10 +57,15 @@ end)
 
 RegisterNetEvent('fsn_bank:change:walletAdd')
 RegisterNetEvent('fsn_bank:change:walletMinus')
-AddEventHandler('fsn_bank:change:walletAdd', function(amt)
-	TriggerServerEvent('fsn_main:money:wallet:Add', GetPlayerServerId(PlayerId()), amt)
+AddEventHandler('fsn_bank:change:walletAdd', function(amount, targetId)
+	--TriggerServerEvent('fsn_main:money:wallet:Add', GetPlayerServerId(PlayerId()), amt)
+  if targetId == nil then
+    TriggerServerEvent('fsn_main:money:wallet:Add', GetPlayerServerId(PlayerId()), amount)
+  else
+    TriggerServerEvent('fsn_main:money:wallet:Add', targetId, amount)
+  end
 	Citizen.Wait(500)
-	TriggerEvent('fsn_main:gui:money:change', wallet, amt)
+	TriggerEvent('fsn_main:gui:money:change', wallet, amount)
 end)
 
 AddEventHandler('fsn_bank:change:walletMinus', function(amt)

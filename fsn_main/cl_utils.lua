@@ -105,7 +105,7 @@ end
 	?? Util.FormatMoneyString(amt: number)
 ]]
 function Util.FormatMoneyString(amt)
-	if exports["arp-core"]:arp_CanAfford(amt) then
+	if exports["fsn_main"]:fsn_CanAfford(amt) then
 		return '(~g~$'..amt..'~w~)'
 	else
 		return '(~r~$'..amt..'~w~)'
@@ -175,6 +175,34 @@ function Util.TableHasValue(table, element)
   return false
 end
 
+--[[
+	Util.GetVecDist(v1,v2)
+	Usage: Util.GetVecDistance(coordinates1, coordinates2)
+	ex: Util.GetVecDist(playerPos, yogaLocation)
+	Gets the vector distance between two entities
+]]
+function Util.GetVecDist(v1,v2)
+    if not v1 or not v2 or not v1.x or not v2.x then return 0; end
+    return math.sqrt(  ( (v1.x or 0) - (v2.x or 0) )*(  (v1.x or 0) - (v2.x or 0) )+( (v1.y or 0) - (v2.y or 0) )*( (v1.y or 0) - (v2.y or 0) )+( (v1.z or 0) - (v2.z or 0) )*( (v1.z or 0) - (v2.z or 0) )  )
+end
+
+function Util.PositionCheck(playerPos, xyz)
+
+	local nearestDist,nearestPos
+	
+	--for k, v in pairs(table) do
+		--print(xyz)
+		local curDist = Util.GetVecDist(playerPos, xyz)
+		if not nearestDist or curDist < nearestDist then
+			nearestDist = curDist
+			nearestPos = v
+		end
+	--end
+	
+	if not nearestDist then return false; end
+	return nearestDist,nearestPos
+	
+end
 
 --[[
 	?? Util.GetClosestPlayer()
@@ -201,6 +229,31 @@ function Util.GetClosestPlayer()
     end
     
     return ClosestPlayer, ClosestDistance
+end
+
+--[[
+	Load Anim Dictionaries
+]]
+function Util.LoadAnimDict(dict)
+	if not HasAnimDictLoaded(dict) then
+		RequestAnimDict(dict)
+
+		while not HasAnimDictLoaded(dict) do
+			Citizen.Wait(1)
+		end
+	end
+end
+
+--[[
+	Make Strings!!
+]]
+function Util.MakeString(length)
+	if length < 1 then return nil end
+	local string = ""
+	for i = 1, length do
+		string = string .. math.random(32, 126)
+	end
+	return string
 end
 
 --[[

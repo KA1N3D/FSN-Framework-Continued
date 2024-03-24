@@ -5,12 +5,25 @@ Public Roleplay Framework for FiveM. Continuation of JamesSc0tt's FSN Framework 
 This framework has not been touched for the past 2 years, there are currently many bugs which will be addressed in the weeks to come, a lot of features may also be outdated and we already have plenty of new features actively being developed! If you have any issues, questions or wish to participate with the continued development of FSN Framework then please join our Discord Server: https://discord.gg/2ZxQDJzC54
 
 #### Requirements
-- FiveM Server
+- x86-64 system running Linux or Windows (7/2008 R2+), decent upstream connection.
+- FiveM Reborn Server
 - Local/Remote MySQL database server
 - At **LEAST** 4GB disk space (including room for future updates) 
 - MySQL Server
 
-#### Alongside the FSN the frameworks core resources, the "framework" is built to work with the below publicly available resources. These are dependicies and must be installed for the framework to run correctly, these will be reviewed.
+## Installation
+Install the required below resources. Set up mysql-async, and add this to your server.cfg:
+```
+ensure mysql-async
+add_ace resource.fsn_main command.start allow
+ensure fsn_main
+
+[ENSURE ALL NON FSN_* RESOURCES HERE]
+```
+
+The framework is designed to create all the tables for you in your DB upon successful connection to your database. If your database is not connected or you are not running mysql-async or have no clue how to do that then search it. We wont provide support on correctly and succesfully connecting to your database
+
+#### Alongside the FSN [resources](https://github.com/jamessc0tt/FiveM-FSN-Framework/blob/master/fsn_main/resources.txt), the "framework" is built to work with the below publicly available resources.
 - mysql-async (https://github.com/brouznouf/fivem-mysql-async)
 - interactsound (https://github.com/plunkettscott/interact-sound)
 - K9 (https://github.com/xander1998/k9)
@@ -22,4 +35,4 @@ This framework has not been touched for the past 2 years, there are currently ma
 - xgc tunerchip (https://github.com/VoXzE/xgc-tunerchip)
 
 #### License
-You are free to use/modify the "framework" in any way you see fit, remember to contribute any worthwile changes to the project with a merge request. Please do not distribute the project without my explicit permission. Do **NOT** remove the ":FSN: Framework by JamesSc0tt" on the character selection/creation screen.
+You are free to use/modify the "framework" in any way you see fit, remember to contribute any worthwile changes to the project with a merge request. Please do not distribute the project without my explicit permission. Do **NOT** remove the "FSN Framework v2.1.4 by JamesSc0tt & iTzCrutchie" on the character selection/creation screen.
